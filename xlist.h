@@ -31,7 +31,7 @@ int insertarPrincipio(List* L, int e);
 //Inserta el elemento enviado al final de la lista
 int insertarFinal(List* L, int e);
 
-//Inserta el elemento enviado de forma ordenada en la lista
+//Inserta el elemento enviado de forma ordenada en la lista. No verifica si la lista se encuentra ordenada, por lo que aunque si ingresara el elemento de forma ordenada, no tendria sentido en una lista que no lo esta.
 int insertarOrden(List* L, int e);
 
 //Busca la primera ocurrencia del elemento recibido. Devuelve 1 si es encontrado, 0 si no.

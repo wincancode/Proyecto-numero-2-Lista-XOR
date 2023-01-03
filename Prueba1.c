@@ -2,108 +2,150 @@
 #include "xlist.h"
 
 
+
+
 int main() {
+
     List* L = crearLista();
-    Inicializar(L);
-    listarFinalAInicio(L);
+    int opcion = -1;
 
+    printf("\nEste programa permite trabajar con una unica lista a la vez.\n");
 
-    for (int i = 1; i < 9; i++)
+    while (opcion != 13)
     {
-        insertarFinal(L, i);
+
+        int elemento = 0;
+        printf("\n\nIngrese la operacion a realizar.");
+        printf("\n1. Inicializar la lista");
+        printf("\n2. Verificar si la lista esta vacia");
+        printf("\n3. Insertar un elemento al inicio de la lista");
+        printf("\n4. Insertar un elemento al final de la lista");
+        printf("\n5. Insertar un elemento en la lista de forma ordenada");
+        printf("\n6. Buscar un elemento en la lista");
+        printf("\n7. Sacar un elemento al inicio de la lista");
+        printf("\n8. Sacar un elemento al final de la lista");
+        printf("\n9. Sacar la primera ocurrencia de un elemento");
+        printf("\n10. Listar de inicio a fin");
+        printf("\n11. Listar de fin a inicio");
+        printf("\n12. Obtener la cantidad de elementos de la lista");
+        printf("\n13. Salir del programa\n");
+
+
+        scanf("%d", &opcion);
+
+        switch (opcion)
+        {
+        case 1: {
+            Inicializar(L);
+            break;
+        }
+
+        case 2: {
+            if (esVacia(L))
+                printf("La lista esta vacia");
+            else
+                printf("La lista no esta vacia");
+
+            break;
+        }
+
+        case 3: {
+            printf("\nIngrese el elemento que desea insertar.\n");
+
+            scanf("%d", &elemento);
+
+            if (insertarPrincipio(L, elemento) == 1)
+                printf("Se logro insertar el elemento");
+            else
+                printf("No se logro insertar el elemento.");
+            break;
+        }
+
+        case 4: {
+            printf("\nIngrese el elemento que desea insertar.\n");
+
+            scanf("%d", &elemento);
+
+            if (insertarFinal(L, elemento) == 1)
+                printf("Se logro insertar el elemento");
+            else
+                printf("No se logro insertar el elemento.");
+            break;
+        }
+
+        case 5: {
+            printf("\nIngrese el elemento que desea insertar.\n");
+
+            scanf("%d", &elemento);
+
+            if (insertarOrden(L, elemento) == 1)
+                printf("Se logro insertar el elemento");
+            else
+                printf("No se logro insertar el elemento.");
+            break;
+        }
+
+        case 6: {
+            printf("\nIngrese el elemento a buscar\n");
+            scanf("%d", &elemento);
+            if (buscar(L, elemento))
+                printf("el elemento se encontro");
+            else
+                printf("el elemento no se encontro");
+            break;
+        }
+
+        case 7: {
+            if (sacarPrincipio(L, &elemento))
+                printf("el elemento al inicio de la lista fue: %d.", elemento);
+            else
+                printf("No se pudo sacar el elemento al inicio de la lista.");
+            break;
+        }
+
+        case 8: {
+            if (sacarFinal(L, &elemento))
+                printf("el elemento al final de la lista fue: %d.", elemento);
+            else
+                printf("No se pudo sacar el elemento al final de la lista.");
+            break;
+        }
+
+        case 9: {
+            printf("\nIngrese el elemento a sacar.\n");
+            scanf("%d", &elemento);
+            if (sacarPrimeraOcurrencia(L, elemento))
+                printf("\nSe logro sacar la primera ocurrencia del elemento.");
+            else
+                printf("\nNo se logro sacar la primera ocurrencia del elemento.");
+            break;
+        }
+
+        case 10: {
+            listarInicioAFinal(L);
+            break;
+        }
+
+        case 11: {
+            listarFinalAInicio(L);
+            break;
+        }
+
+        case 12: {
+            printf("\nLa lista tiene: %d elementos", cantidadElementos(L));
+            break;
+        }
+
+        case 13: {
+            printf("\nGracias por utilizar el programa!");
+            break;
+        }
+
+        default: {
+            printf("\n Ha ingresado una opcion no valida.");
+            break;
+        }
+        }
     }
-    insertarPrincipio(L, 0);
 
-
-
-    listarFinalAInicio(L);
-    printf("\n\n");
-    listarInicioAFinal(L);
-
-    printf("\n\n");
-
-    printf("cantidad de elementos: %d\n", cantidadElementos(L));
-
-    printf("\n\n");
-
-    int inicio;
-    sacarPrincipio(L, &inicio);
-    printf("Inicio: %d\n", inicio);
-    listarInicioAFinal(L);
-
-    printf("\n\n");
-
-    int final;
-    sacarFinal(L, &final);
-    printf("Final: %d\n", final);
-    listarInicioAFinal(L);
-
-    printf("\n\n");
-
-    Inicializar(L);
-    listarInicioAFinal(L);
-
-    for (int i = 1; i < 9; i++)
-    {
-        insertarFinal(L, i);
-    }
-    insertarPrincipio(L, 0);
-
-
-    printf("\n\n");
-    listarInicioAFinal(L);
-    printf("Buscar numero 3: %d\n", buscar(L, 3));
-    printf("Buscar numero 100: %d\n", buscar(L, 100));
-    printf("Buscar numero 8: %d\n", buscar(L, 8));
-    printf("Buscar numero 0: %d\n", buscar(L, 0));
-
-
-    printf("\n\n");
-
-    printf("\nsacar elemento 5");
-    sacarPrimeraOcurrencia(L, 5);
-    listarInicioAFinal(L);
-    listarFinalAInicio(L);
-
-    printf("\nsacar elemento 0");
-    sacarPrimeraOcurrencia(L, 0);
-    listarInicioAFinal(L);
-    listarFinalAInicio(L);
-
-    printf("\nsacar elemento 8");
-    sacarPrimeraOcurrencia(L, 8);
-    listarInicioAFinal(L);
-    listarFinalAInicio(L);
-
-
-    printf("\n\n");
-    printf("\ninsertar ordenado 4");
-    insertarOrden(L, 4);
-    listarInicioAFinal(L);
-    listarFinalAInicio(L);
-    
-    printf("\ninsertar ordenado 5");
-    insertarOrden(L, 5);
-    listarInicioAFinal(L);
-    listarFinalAInicio(L);
-
-    printf("\ninsertar ordenado 8");
-    insertarOrden(L, 8);
-    listarInicioAFinal(L);
-    listarFinalAInicio(L);
-
-    printf("\ninsertar ordenado 20");
-    insertarOrden(L, 20);
-    listarInicioAFinal(L);
-    listarFinalAInicio(L);
-
-    printf("\ninsertar ordenado -2");
-    insertarOrden(L, -2);
-    listarInicioAFinal(L);
-    listarFinalAInicio(L);
-
-    printf("\ninsertar ordenado -1");
-    insertarOrden(L, -1);
-    listarInicioAFinal(L);
-    listarFinalAInicio(L);
 }
