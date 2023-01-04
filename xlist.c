@@ -49,10 +49,8 @@ int Inicializar(List* L) {
 
 }
 
-int esVacia(List* L) {
-    if (L->head == NULL)
-        return 1;
-    return 0;
+inline int esVacia(List* L) {
+    return L->head ? 0 : 1;
 }
 
 int insertarPrincipio(List* L, int e) {
@@ -147,13 +145,19 @@ int insertarOrden(List* L, int e) {
 }
 
 int buscar(List* L, int e) {
+    if (esVacia(L)) return 0;
+
     node* Actual = L->head;
     node* Prev = NULL;
     node* next;
-
+    int i = 0;
     //Unicamente se recorre la lista hasta encontrar el elemento.
     while (Actual) {
-        if (Actual->data == e) return 1;
+        i++;
+        if (Actual->data == e) {
+            printf("\nEl elemento se encuentra en la posicion %d\n", i);
+            return 1;
+        }
         next = XOR(Actual->xnext, Prev);
         Prev = Actual;
         Actual = next;
@@ -182,7 +186,6 @@ int sacarPrincipio(List* L, int* e) {
     L->head->xnext = XOR(OldHead, L->head->xnext);
 
     free(OldHead);
-
 
     return 1;
 }
@@ -214,17 +217,16 @@ int sacarFinal(List* L, int* e) {
 int sacarPrimeraOcurrencia(List* L, int e) {
     if (esVacia(L)) return 0;
 
-    node* Actual = L->head;
-    node* Prev = NULL;
-    node* next;
-
-
-    int Resultado = 0; // Booleano que permitira saber si se elimino un nodo o no se realizo la operacion.
-
     //Se verifica si el nodo a sacar se encuentra en la cabeza.
     if (L->head->data == e) {
         return sacarPrincipio(L, &e);
     }
+
+    node* Actual = L->head;
+    node* Prev = NULL;
+    node* next;
+
+    int Resultado = 0; // Booleano que permitira saber si se elimino un nodo o no se realizo la operacion.
 
     while (Actual) {
         if (Actual->data == e) {
@@ -287,6 +289,8 @@ void listarFinalAInicio(List* L) {
 }
 
 int  cantidadElementos(List* L) {
+    if (esVacia(L)) return 0;
+
     node* Actual = L->head;
     node* Prev = NULL;
     node* next;

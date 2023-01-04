@@ -1,8 +1,6 @@
 #ifndef HEAD_H_
 #define HEAD_H_
 
-
-
 typedef struct node {
     int data;
     struct node* xnext;
