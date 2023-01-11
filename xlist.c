@@ -46,7 +46,6 @@ int Inicializar(List* L) {
     L->end = L->head = NULL;
 
     return 1;
-
 }
 
 inline int esVacia(List* L) {
@@ -194,7 +193,7 @@ int sacarFinal(List* L, int* e) {
     if (esVacia(L)) return 0;
 
     //Misma estrategia a la utilizada en SacarPrincipio.
-
+                                                            
     (*e) = L->end->data;
 
     if (L->head == L->end) {
@@ -226,11 +225,8 @@ int sacarPrimeraOcurrencia(List* L, int e) {
     node* Prev = NULL;
     node* next;
 
-    int Resultado = 0; // Booleano que permitira saber si se elimino un nodo o no se realizo la operacion.
-
     while (Actual) {
         if (Actual->data == e) {
-            Resultado = 1;
 
             //Se obtiene el nodo siguiente al actual y se reacomodan los nodos para aislar y liberar el que se debe sacar.
             node* NextNodeAux = XOR(Actual->xnext, Prev);
@@ -243,7 +239,7 @@ int sacarPrimeraOcurrencia(List* L, int e) {
                 L->end = Prev;
 
             free(Actual);
-            break;
+            return 1;
         }
 
         next = XOR(Actual->xnext, Prev);
@@ -251,7 +247,7 @@ int sacarPrimeraOcurrencia(List* L, int e) {
         Actual = next;
     }
 
-    return Resultado;
+    return 0;
 }
 
 inline void PrintListAux(node* Actual) {
